@@ -1,0 +1,23 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+gcloud = "*"
+google-auth = "*"
+google-api-core = "*"
+google-api-python-client = "*"
+google-cloud-storage = "*"
+google-cloud-vision = "*"
+delta-sharing = "*"
+jupyter = "*"
+jwcrypto = "*"
+requests = "*"
+uuid = "*"
+pandas = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.12"

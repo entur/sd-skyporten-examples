@@ -1,0 +1,10 @@
+{
+    "scope": "foo:adminenheter",
+    "bucket_name": "skyporten-222222222",
+    "resource": "https://skyporten.fooet",
+    "GOOGLE_PROJECT_ID": "dataplattform-sandbox-9999",
+    "SERVICE_ACCOUNT_EMAIL": "skyportenstorageconsumer@dataplattform-sandbox-9999.iam.gserviceaccount.com",
+    "POOL_PROVIDER": "testskyporten",
+    "PROVIDER_NAME": "testskyporten",
+    "PROJECT_NUMBER": "99999999999999"
+}
