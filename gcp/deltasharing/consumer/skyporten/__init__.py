@@ -8,15 +8,24 @@ from google.cloud import storage
 from google.auth import identity_pool
 
 
-def get_bucket_file(*, config, bucketname, filename):
+def get_bucket_file(*, config):
     """Load content of remote delta sharing file,
     residing on a gcp file storage bucket, using
     maskinporten for access.
     """
-    # Variables from integration
+
+    MANDATORY_ENV_VARS = ["MASKINPORTEN_KID", "MASKINPORTEN_INTEGRATION_ID"]
+
+    for var in MANDATORY_ENV_VARS:
+        if var not in os.environ:
+            raise EnvironmentError("__init__.py: Failed because {} is not set in environment.".format(var))
+
+
+    # Variables for Maskinporten-integration
     kid = os.environ["MASKINPORTEN_KID"]
     scope = config["scope"]
     integration_id = os.environ["MASKINPORTEN_INTEGRATION_ID"]
+
 
     # Environment specific variables
     maskinporten_audience = "https://test.sky.maskinporten.no"
@@ -58,6 +67,7 @@ def get_bucket_file(*, config, bucketname, filename):
         'assertion': signed_jwt
     }
 
+
     res = requests.post(maskinporten_token, data=body)
     with open("token.json", "w") as file:
         file.write(res.text)
@@ -79,6 +89,8 @@ def get_bucket_file(*, config, bucketname, filename):
 
     credentials = identity_pool.Credentials.from_info(json_config_info)
     storage_client = storage.Client(project=config['GOOGLE_PROJECT_ID'], credentials=credentials)
+    bucketname = config["bucket_name"]
+    filename = config["filename"]
     print(list(storage_client.list_blobs(bucketname)))
     print("__init__.py:" + repr(84) + ":bucketname:" + repr(bucketname))
     bucket = storage_client.get_bucket(bucketname)
