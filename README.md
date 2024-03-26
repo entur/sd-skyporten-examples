@@ -1,6 +1,9 @@
 # sd-skyporten-examples
 Examples for how to share data with skyporten (maskinporten)
+/skyporten
 
+The current examples is 
+* [Consume deltasharing files from GCP](gcp/deltasharing/consumer/README.md)
 
 ## Troubleshooting
 
